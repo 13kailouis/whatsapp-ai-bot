@@ -390,9 +390,18 @@ function parseEasyScheduleInput(text) {
 /*******************************************************
  *   EVENT HANDLER
  *******************************************************/
-client.on('qr', (qr) => {
-  qrcode.generate(qr, { small: true });
-  console.log('[INFO] Silakan scan QR di WA!');
+client.on('qr', async (qr) => {
+  try {
+    console.log('[INFO] Silakan scan QR di WA!');
+    // Tampilkan di terminal
+    qrcode.generate(qr, { small: true });
+
+    // Simpan ke file gambar
+    await qrcode.toFile('qr-code.png', qr);
+    console.log('[INFO] QR Code berhasil disimpan sebagai qr-code.png');
+  } catch (err) {
+    console.error('[ERROR] Gagal membuat QR Code:', err);
+  }
 });
 
 client.on('ready', () => {
