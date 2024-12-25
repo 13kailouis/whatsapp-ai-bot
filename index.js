@@ -391,11 +391,9 @@ function parseEasyScheduleInput(text) {
  *   EVENT HANDLER
  *******************************************************/
 client.on('qr', (qr) => {
-    const qrCode = require('qrcode');
-    qrCode.toFile('qr.png', qr, (err) => {
-        if (err) console.error(err);
-        else console.log('QR code disimpan sebagai qr.png');
-    });
+  qrcode.generate(qr, { small: true });
+  console.log('[INFO] Silakan scan QR di WA!');
+});
 
 client.on('ready', () => {
   console.log('[INFO] Bot WA siap digunakan!');
